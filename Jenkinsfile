@@ -13,6 +13,13 @@ pipeline {
                 echo 'mvn clean build and compiled'
             }
         }
-      
+         stage('Test') {
+            steps {
+//                 bat './mvnw test'
+                bat 'mvn test'
+                echo 'mvn tested'
+            }
+        }
+       
     }
 }
