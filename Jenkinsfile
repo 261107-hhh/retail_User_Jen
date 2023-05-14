@@ -1,12 +1,16 @@
 pipeline {
     agent any
-
+	tools {
+        // Install the Maven version configured as "M3" and add it to the path.
+         maven 'mvn'
+    }
     stages {
         stage('Build') {
             steps {
-//                 bat './mvnw clean install'
-                bat 'mvn clean compile'
-                echo 'mvnw compiled'
+              //  bat 'mvn clean compile'
+              	bat 'mvn clean install -Dmaven.test.skip=true'
+              //bat "mvn -Dmaven.test.failure.ignore=true clean package"
+                echo 'mvn clean build and compiled'
             }
         }
         stage('Test') {
