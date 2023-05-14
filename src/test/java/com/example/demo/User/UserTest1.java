@@ -1,19 +1,23 @@
 package com.example.demo.User;
 
-//import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
-//import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertEquals;
-//import static org.junit.Assert.assertTrue;
-//import static org.mockito.ArgumentMatchers.any;
-//import static org.mockito.Mockito.doNothing;
-//import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
 
 //import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 //import java.util.List;
 import java.util.Optional;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 //import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 //import org.aspectj.lang.annotation.After;
 //import org.aspectj.lang.annotation.Before;
@@ -46,9 +50,9 @@ import com.example.demo.Service.UserService;
 //import com.example.demo.payload.ApiResponse;
 import com.example.demo.payload.UserDto;
 
-//import io.restassured.http.ContentType;
-//import io.restassured.internal.path.json.mapping.JsonObjectDeserializer;
-//import net.bytebuddy.agent.VirtualMachine.ForHotSpot.Connection.Response;
+import io.restassured.http.ContentType;
+import io.restassured.internal.path.json.mapping.JsonObjectDeserializer;
+import net.bytebuddy.agent.VirtualMachine.ForHotSpot.Connection.Response;
 
 
 //@PreAuthorize(("hasRole('ADMIN')") )
@@ -72,7 +76,7 @@ public class UserTest1 {
 	
 	static 	int id ;
 	UserDto user;
-	String mail = "test@example.com";
+	static String mail = "test@example.com";
 	
 	
 	@Test
@@ -119,25 +123,14 @@ public class UserTest1 {
 	// Verify the response
 		assertEquals("updated@example.com", response.getEmail());
 		assertEquals(id, response.getUserId());
+		mail ="updated@example.com";
 	}
 
-	@Test
-	@Order(3)
-	public void testDeleteUser() {
 	
-		// Perform the call
-		
-		userService.delete(id);
 	
-		// Verify the response
-		Optional<User> res = userRepository.findByEmail(mail);
-		assertThat(res).isEmpty();
-		
-	}
-	
-//	 @Test
-//	 @Order(4)
-//	    public void testGetAll() throws JSONException {
+	 @Test
+	 @Order(3)
+	    public void testGetAll() throws JSONException {
 //	    	 String jsonBody="{ \"username\": \"himanshu.nainwal@stl.tech\", \"password\":\"123\"}";
 //	    	 String tokenn =  given()
 //	               .header("Content-type", "application/json").contentType(ContentType.JSON).accept(ContentType.JSON)
@@ -168,18 +161,19 @@ public class UserTest1 {
 //	    	String d = jj.getString(0);
 //	    	JSONObject jjo = new JSONObject(d);
 //	    	String jEmail = jjo.getString("email");
-//	    	
-//	    	List<UserDto> res = userService.getAll();
-//	    	String email = res.get(0).getEmail();
+	    	
+	    	List<UserDto> res = userService.getAll();
+	    	String email = res.get(res.size()-1).getEmail();
 //	    	System.out.println(jj.get(0));
-//	    	System.out.println(email);
-//	    	assertEquals(email, jEmail);
-//	       
-//	    }
+	    	System.out.println(email);
+	    	System.out.println(mail+ " :mail");
+	    	assertEquals(mail, email);
+	       
+	    }
 	
 //
 	@Test
-	@Order(5)
+	@Order(4)
 	public void testGetUserById() {
 
 		int userId = 1;
@@ -191,7 +185,7 @@ public class UserTest1 {
 	}
 //
 	@Test
-	@Order(6)	
+	@Order(5)	
 	public void testGetUserByEmail() {
 	// Prepare test data
 
@@ -206,5 +200,17 @@ public class UserTest1 {
 //		ResponseEntity<UserDto> res = userController.getUserByEmail(mail);
 		
 	}
+	@Test
+	@Order(6)
+	public void testDeleteUser() {
 	
+		// Perform the call
+		
+		userService.delete(id);
+	
+		// Verify the response
+		Optional<User> res = userRepository.findByEmail(mail);
+		assertThat(res).isEmpty();
+		
+	}
 }
