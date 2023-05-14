@@ -21,6 +21,13 @@ pipeline {
                 echo 'mvn tested'
             }
         }
+        stage('Deploy') {
+            steps {
+//                 bat './mvnw deploy'
+                bat 'mvn deploy'
+                echo 'mvn deployed'
+            }
+        }
        
     }
 }
