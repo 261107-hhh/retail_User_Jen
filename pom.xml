@@ -16,13 +16,13 @@
 	<properties>
 		<java.version>17</java.version>
 	</properties>
-	<pluginRepositories>
+	<!--<pluginRepositories>
     <pluginRepository>
         <id>temp.repo</id>
         <name>Temp Repo</name>
         <url>file://${user.home}/.m2/temp-repository</url>
     </pluginRepository>
-</pluginRepositories>
+</pluginRepositories>-->
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
