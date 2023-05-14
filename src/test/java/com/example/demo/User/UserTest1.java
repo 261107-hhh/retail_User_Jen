@@ -1,58 +1,58 @@
 package com.example.demo.User;
 
-import static io.restassured.RestAssured.given;
+//import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.CoreMatchers.equalTo;
+//import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+//import static org.junit.Assert.assertTrue;
+//import static org.mockito.ArgumentMatchers.any;
+//import static org.mockito.Mockito.doNothing;
+//import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+//import java.util.List;
 import java.util.Optional;
 
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Before;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.junit.FixMethodOrder;
+//import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+//import org.aspectj.lang.annotation.After;
+//import org.aspectj.lang.annotation.Before;
+//import org.json.JSONArray;
+//import org.json.JSONException;
+//import org.json.JSONObject;
+//import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.modelmapper.ModelMapper;
+//import org.junit.runner.RunWith;
+//import org.junit.runners.MethodSorters;
+//import org.mockito.InjectMocks;
+//import org.mockito.Mock;
+//import org.mockito.MockitoAnnotations;
+//import org.mockito.junit.MockitoJUnitRunner;
+//import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.demo.Controller.UserController;
 import com.example.demo.Model.User;
 import com.example.demo.Repository.UserRepository;
 import com.example.demo.Service.UserService;
-import com.example.demo.payload.ApiResponse;
+//import com.example.demo.payload.ApiResponse;
 import com.example.demo.payload.UserDto;
 
-import io.restassured.http.ContentType;
-import io.restassured.internal.path.json.mapping.JsonObjectDeserializer;
-import net.bytebuddy.agent.VirtualMachine.ForHotSpot.Connection.Response;
+//import io.restassured.http.ContentType;
+//import io.restassured.internal.path.json.mapping.JsonObjectDeserializer;
+//import net.bytebuddy.agent.VirtualMachine.ForHotSpot.Connection.Response;
 
 
+//@PreAuthorize(("hasRole('ADMIN')") )
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@PreAuthorize(("hasRole('ADMIN')") )
 @SpringBootTest
 public class UserTest1 {
 	
@@ -200,11 +200,11 @@ public class UserTest1 {
 	// Perform the call
 		UserDto response = userService.getByEmailId(mail);
 
-		assertEquals(mail, response.getEmail());
+		assertEquals(response.getEmail(), mail);
 		
 		
 //		ResponseEntity<UserDto> res = userController.getUserByEmail(mail);
 		
 	}
-//	
+	
 }
