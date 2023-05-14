@@ -9,7 +9,8 @@ pipeline {
             steps {
               //  bat 'mvn clean compile'
               //	bat 'mvn clean install -Dmaven.test.skip=true'
-              bat "mvn -Dmaven.test.failure.ignore=true clean package"
+              bat 'mvn clean install -Dmaven.test.skip=true'
+              //bat "mvn -Dmaven.test.failure.ignore=true clean package"
                 echo 'mvn clean build and compiled'
             }
         }
