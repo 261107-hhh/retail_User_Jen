@@ -20,7 +20,8 @@ pipeline {
          stage('Test') {
             steps {
 //                 bat './mvnw test'
-                bat 'mvn test'
+                //bat 'mvn test'
+                bat 'mvn clean test'
                 echo 'mvn tested'
             }
         }
