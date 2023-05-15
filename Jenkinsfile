@@ -8,10 +8,13 @@ pipeline {
         stage('Build') {
             steps {
               bat 'mvn clean compile'
+              echo 'mvn clean and compiled'
+              //bat 'mvn clean install'
+              //echo 'mvn clean and build'
               //	bat 'mvn clean install -Dmaven.test.skip=true'
               //bat 'mvn clean install -Dmaven.test.skip=true'
               //bat "mvn -Dmaven.test.failure.ignore=true clean package"
-                echo 'mvn clean and compiled'
+                
             }
         }
          stage('Test') {
@@ -19,6 +22,13 @@ pipeline {
 //                 bat './mvnw test'
                 bat 'mvn test'
                 echo 'mvn tested'
+            }
+        }
+         stage('Deploy') {
+            steps {
+//                 bat './mvnw deploy'
+                bat 'mvn deploy'
+                echo 'mvn deployed'
             }
         }
        
