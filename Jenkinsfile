@@ -15,8 +15,8 @@ pipeline {
               
               //bat 'mvn clean install -Dmaven.test.skip=true'
               
-              //bat "mvn -Dmaven.test.failure.ignore=true clean package"
- 			  bat 'mvn package'
+              bat "mvn -Dmaven.test.failure.ignore=true clean package"
+ 			  //bat 'mvn package'
               echo 'packed'  
             }
         }
