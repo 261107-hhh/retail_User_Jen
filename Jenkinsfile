@@ -29,8 +29,7 @@ pipeline {
         }
          stage('Deploy') {
             steps {
-
-                bat 'java -jar target/UserMicroservice-0.0.1-SNAPSHOT.jar'
+                bat 'java -jar target/surefire-reports/UserMicroservice-0.0.1-SNAPSHOT.jar'
                 echo 'mvn deployed'
             }
         }
