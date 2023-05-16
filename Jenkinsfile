@@ -15,7 +15,8 @@ pipeline {
               
               //bat 'mvn clean install -Dmaven.test.skip=true'
               
-              bat "mvn -Dmaven.test.failure.ignore=true clean package"
+              //bat "mvn -Dmaven.test.failure.ignore=true clean package"
+ 			  bat 'mvn package'
               echo 'packed'  
             }
         }
@@ -23,12 +24,13 @@ pipeline {
             steps {
                 //bat './mvnw test'
                 //bat 'mvn test'
-                bat 'mvn clean test'
+                bat 'mvn test'
                 echo 'mvn tested'
             }
         }
          stage('Deploy') {
             steps {
+	            //bat 'java -jar target/UserMicroservice-0.0.1-SNAPSHOT.jar'
                 bat 'java -jar target/surefire-reports/UserMicroservice-0.0.1-SNAPSHOT.jar'
                 echo 'mvn deployed'
             }
