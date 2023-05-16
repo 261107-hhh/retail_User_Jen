@@ -7,14 +7,16 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-              bat 'mvn clean compile'
-              echo 'mvn clean and compiled'
+              //bat 'mvn clean compile'
+              //echo 'mvn clean and compiled'
+              
               //bat 'mvn clean install'
               //echo 'mvn clean and build'
+              
               //bat 'mvn clean install -Dmaven.test.skip=true'
-              //bat 'mvn clean install -Dmaven.test.skip=true'
-              //bat "mvn -Dmaven.test.failure.ignore=true clean package"
-                
+              
+              bat "mvn -Dmaven.test.failure.ignore=true clean package"
+              echo 'packed'  
             }
         }
          stage('Test') {
@@ -28,7 +30,7 @@ pipeline {
          stage('Deploy') {
             steps {
 
-                bat 'mvn deploy'
+                bat 'java -jar target/UserMicroservice-0.0.1-SNAPSHOT.jar'
                 echo 'mvn deployed'
             }
         }
