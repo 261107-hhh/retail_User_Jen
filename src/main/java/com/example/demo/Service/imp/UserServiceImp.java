@@ -32,9 +32,9 @@ public class UserServiceImp implements UserService {
 			  roleId = 5245;
 		  }
 		  Role role = this.roleRepository.findById(roleId).get();
-		   user.getRoles().add(role);
+		  user.getRoles().add(role);
 		  User userCreate=this.userRepositroy.save(user);
-	
+		  
 		return this.toDto(userCreate);
 	}
 

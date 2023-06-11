@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.Exception.BadUserLoginDetailsException;
 import com.example.demo.Model.Role;
 import com.example.demo.Service.UserService;
 import com.example.demo.payload.ApiResponse;
@@ -52,6 +53,14 @@ public class UserController {
 		userDto.setDate(date);
 		userDto.setActive(true);
 		userDto.setPassword(this.passwordEncoder.encode(userDto.getPassword()));
+		  if(!userDto.getEmail().contains("@")) {
+			  throw new BadUserLoginDetailsException("Invalid Mail");
+//			  return new ResponseEntity<UserDto>().badRequest().body("Invalid Email");
+		  }
+		  if(userDto.getPhone().length()-1 != 10) {
+			  throw new BadUserLoginDetailsException("Invalid Phone Number");
+//			  return new ResponseEntity<UserDto>().badRequest().body("Invalid Email");
+		  }
 		UserDto ud=this.userService.create(userDto);
 		return new ResponseEntity<UserDto>(ud,HttpStatus.CREATED);
 	}

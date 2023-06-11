@@ -197,7 +197,7 @@ class UserControllerTest {
 	@Order(4)
 	public void testGetUserById() {
 
-		int userId = 1;
+		int userId = 2;
 		String mail = "himanshu.nainwal@stl.tech";
 
 		UserDto response = userService.getByUserId(userId);
