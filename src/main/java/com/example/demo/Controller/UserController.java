@@ -57,7 +57,8 @@ public class UserController {
 			  throw new BadUserLoginDetailsException("Invalid Mail");
 //			  return new ResponseEntity<UserDto>().badRequest().body("Invalid Email");
 		  }
-		  if(userDto.getPhone().length()-1 != 10) {
+		  System.out.println(userDto.getPhone().length() +" length of number");
+		  if(userDto.getPhone().length() != 10) {
 			  throw new BadUserLoginDetailsException("Invalid Phone Number");
 //			  return new ResponseEntity<UserDto>().badRequest().body("Invalid Email");
 		  }

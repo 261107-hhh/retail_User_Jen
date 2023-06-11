@@ -112,6 +112,7 @@ class UserControllerTest {
 		Date currentDate = new Date();
 		user.setDate(currentDate);
 		user.setActive(true);
+		user.setPhone("2134567890");
 		
 		
 		// Perform the call
@@ -197,10 +198,10 @@ class UserControllerTest {
 	@Order(4)
 	public void testGetUserById() {
 
-		int userId = 2;
-		String mail = "himanshu.nainwal@stl.tech";
+//		int userId = 2;
+//		String mail = "himanshu.nainwal@stl.tech";
 
-		UserDto response = userService.getByUserId(userId);
+		UserDto response = userService.getByUserId(id);
 	
 		assertEquals(response.getEmail(), mail);
 	}
@@ -210,7 +211,7 @@ class UserControllerTest {
 	public void testGetUserByEmail() {
 	// Prepare test data
 
-		String mail = "himanshu.nainwal@stl.tech";
+//		String mail = "himanshu.nainwal@stl.tech";
 		
 	// Perform the call
 		UserDto response = userService.getByEmailId(mail);
