@@ -112,7 +112,7 @@ class UserControllerTest {
 		Date currentDate = new Date();
 		user.setDate(currentDate);
 		user.setActive(true);
-		user.setPhone("2134567890");
+		user.setPhone("1034567890");
 		
 		
 		// Perform the call
