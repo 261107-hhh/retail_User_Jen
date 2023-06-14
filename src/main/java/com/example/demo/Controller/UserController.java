@@ -41,6 +41,7 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
 	@Autowired
 	private ModelMapper mapper;
 	
@@ -69,7 +70,14 @@ public class UserController {
 	@PreAuthorize("hasRole('ADMIN')")   
 	@PutMapping("/{userId}")
     public ResponseEntity<UserDto> update(@PathVariable int userId,@RequestBody UserDto ud) {
-    	
+		System.out.println(ud.isActive()+" active or not");
+		if(ud.isActive()) {
+			ud.setActive(true);			
+		}
+		else {
+			ud.setActive(false);
+		}
+		ud.setPassword(this.passwordEncoder.encode(ud.getPassword()));
     	      UserDto userdto=userService.update(ud, userId);
     	      
     	return new ResponseEntity<UserDto>(userdto,HttpStatus.OK);
@@ -95,12 +103,13 @@ public class UserController {
 	@PreAuthorize("hasRole('ADMIN')")   
 	@GetMapping("/{userId}")
 	public ResponseEntity<UserDto> getUserById(@PathVariable int userId) {
-		      
+		    System.out.println("getting User With Id: "+ userId);
 			UserDto userdto=userService.getByUserId(userId);
-		
+			
 		return new ResponseEntity<UserDto>(userdto,HttpStatus.OK);
 		
 	}
+	
 	@PreAuthorize("hasRole('ADMIN')")   
 	@GetMapping("email/{email}")
 	public ResponseEntity<UserDto>getUserByEmail(@PathVariable String email){

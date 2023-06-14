@@ -1,5 +1,7 @@
 package com.example.demo.Controller;
 
+import java.util.Optional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.payload.UserDto;
 import com.example.demo.Exception.BadUserLoginDetailsException;
+import com.example.demo.Model.User;
+import com.example.demo.Repository.UserRepository;
 import com.example.demo.Service.imp.CustomUserDetailsService;
 import com.example.demo.payload.JwtRequest;
 import com.example.demo.payload.JwtResponse;
@@ -31,15 +35,24 @@ public class AuthController {
 	@Autowired
 	private CustomUserDetailsService userDrtailsservice;
 	@Autowired
+	private UserRepository userRepository;
+	@Autowired
 	private JwtHelper jwthelper;
 	@Autowired
 	private ModelMapper mapper;
 	@PostMapping("/login")
 	public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest request)throws Exception{
-
-		this.authenticateUser(request.getUsername(),request.getPassword());
-		UserDetails UserDetail = this.userDrtailsservice.loadUserByUsername(request.getUsername());
 		
+		this.authenticateUser(request.getUsername(),request.getPassword());
+		
+		UserDetails UserDetail = this.userDrtailsservice.loadUserByUsername(request.getUsername());
+		userRepository.findByEmail(UserDetail.getUsername());
+		System.out.println(UserDetail.getUsername()+" User Name");
+		Optional<User> user = userRepository.findByEmail(UserDetail.getUsername());
+		if(!user.get().isActive()) {
+			System.out.println("Not an active user");
+			throw new BadUserLoginDetailsException("User is Not Active");
+		}
 		/*  
 		 * if username and password both are Correct then get token by line no *47
 		 * create jwtResponse(this class created by my) object
