@@ -101,6 +101,7 @@
     			<!--<version>2.8.2</version>-->
 			</plugin>
 		</plugins>
+		<finalName>retail-user-docker</finalName>
 	</build>
 
 </project>
