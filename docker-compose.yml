@@ -1,0 +1,33 @@
+# version: '3.9'
+# services: 
+#  sql-sqerver-db: 
+#   container_name: retail 
+#   image: mysql
+#   ports:
+#    - "1234:1234"
+
+version: '3'
+services:
+ mysql:
+  image: mysql
+  restart: always
+  expose:
+   - "3306"
+  environment: 
+   MYSQL_ROOT_PASSWORD: Admin@2022
+   MYSQL_DATABASE: ecom_batch1
+   MYSQL_PASSWORD: Admin@2022
+   MYSQL_ROOT_USER: root
+ retail_User_Jen:
+  build:
+   context: .
+   dockerfile: Dockerfile
+  ports:
+   - 9001:9001
+  depends_on:
+   - mysql
+  environment:
+   SPRING_DATASOURCE_URL: "jdbc:mysql://mysqldb:3306/ecom_batch1"
+   SPRING_DATASOURCE_USERNAME: root
+   SPRING_DATASOURCE_PASSWORD: Admin@2022
+   

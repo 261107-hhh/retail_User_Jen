@@ -1,5 +1,5 @@
 FROM openjdk:17
-WORKDIR '/app'
+WORKDIR /app
 ADD target/retail-user-docker.jar retail-user-docker.jar 
 EXPOSE 9001
 COPY . .
