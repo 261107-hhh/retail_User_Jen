@@ -45,7 +45,12 @@ public class UserController {
 	@Autowired
 	private ModelMapper mapper;
 	
-	 
+	
+	@GetMapping("/")
+	public String abc(){
+		return "HelloUser";
+	}
+	
 	@PostMapping("/")
 	public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
