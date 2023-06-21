@@ -18,7 +18,7 @@ services:
    MYSQL_DATABASE: ecom_batch1
    MYSQL_PASSWORD: Admin@2022
    MYSQL_ROOT_USER: root
- retail_user_jen:
+ retail_User_Jen:
   image: retail-user-docker:latest
   ports:
    - 9001:9001
