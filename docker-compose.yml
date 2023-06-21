@@ -8,26 +8,22 @@
 
 version: '3'
 services:
- mysql:
+ mysqldb:
   image: mysql
   restart: always
-  expose:
-   - "3306"
+  ports:
+   - 3306:3306
   environment: 
    MYSQL_ROOT_PASSWORD: Admin@2022
    MYSQL_DATABASE: ecom_batch1
    MYSQL_PASSWORD: Admin@2022
    MYSQL_ROOT_USER: root
- retail_User_Jen:
-  build:
-   context: .
-   dockerfile: Dockerfile
+ retail_user_jen:
+  image: retail-user-docker:latest
   ports:
    - 9001:9001
+  build:
+   context: ./
+   dockerfile: Dockerfile
   depends_on:
-   - mysql
-  environment:
-   SPRING_DATASOURCE_URL: "jdbc:mysql://mysqldb:3306/ecom_batch1"
-   SPRING_DATASOURCE_USERNAME: root
-   SPRING_DATASOURCE_PASSWORD: Admin@2022
-   
+   - mysqldb
