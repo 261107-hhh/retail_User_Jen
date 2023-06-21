@@ -20,6 +20,7 @@ services:
    MYSQL_ROOT_USER: root
  retail_User_Jen:
   image: retail-user-docker:latest
+  restart: unless-stopped
   ports:
    - 9001:9001
   build:
