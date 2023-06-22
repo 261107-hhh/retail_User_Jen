@@ -46,7 +46,7 @@ public class UserController {
 	private ModelMapper mapper;
 	
 	
-	@GetMapping("/")
+	@GetMapping("/a")
 	public String abc(){
 		return "HelloUser";
 	}
