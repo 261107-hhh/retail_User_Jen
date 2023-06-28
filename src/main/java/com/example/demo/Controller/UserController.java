@@ -45,15 +45,12 @@ public class UserController {
 	@Autowired
 	private ModelMapper mapper;
 	
-	
-	@GetMapping("/a")
-	public String abc(){
-		return "HelloUser";
-	}
-	
 	@PostMapping("/")
 	public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		if(userDto.getGender() == null) {
+			userDto.setGender("Other");
+		}
 		Date date=new Date();
 		formatter.format(date);
 		userDto.setDate(date);
@@ -63,8 +60,8 @@ public class UserController {
 			  throw new BadUserLoginDetailsException("Invalid Mail");
 //			  return new ResponseEntity<UserDto>().badRequest().body("Invalid Email");
 		  }
-		  System.out.println(userDto.getPhone().length() +" length of number");
 		  if(userDto.getPhone().length() != 10) {
+			  System.out.println(userDto.getPhone().length() +" length of number");
 			  throw new BadUserLoginDetailsException("Invalid Phone Number");
 //			  return new ResponseEntity<UserDto>().badRequest().body("Invalid Email");
 		  }
@@ -115,7 +112,7 @@ public class UserController {
 		
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")   
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("email/{email}")
 	public ResponseEntity<UserDto>getUserByEmail(@PathVariable String email){
 		            UserDto emailfind=userService.getByEmailId(email);

@@ -32,7 +32,7 @@ pipeline {
         }
          stage('Deploy') {
             steps {
-	            bat 'java -jar target/UserMicroservice-0.0.1-SNAPSHOT.jar'
+	            bat 'java -jar target/retail-user-docker.jar'
                 echo 'mvn deployed'
             }
         }

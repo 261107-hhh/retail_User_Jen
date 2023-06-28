@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services:
  mysqldb:
   image: mysql
@@ -13,9 +13,9 @@ services:
    MYSQL_PASSWORD: Admin@2022
    MYSQL_ROOT_USER: root
  retail_User_Jen:
-  image: retail-user-docker:latest
+  image: retail-user-docker_img:latest
   container_name:
-   "retail_user"
+   "retail_user_cont"
   restart: unless-stopped
  # restart: always
   ports:
@@ -26,8 +26,57 @@ services:
   depends_on:
    - mysqldb
   environment:
-   SPRING_DATASOURCE_URL: "jdbc:mysql://mysqldb:3306/ecom_batch1"
+   SPRING_DATASOURCE_URL: "jdbc:mysql://mysqldb:3306/ecom_batch1?createDatabaseIfNotExist=true&sessionVariables=sql_mode='NO_ENGINE_SUBSTITUTION'&jdbcCompliantTruncation=false"
    SPRING_DATASOURCE_USERNAME: root
    SPRING_DATASOURCE_PASSWORD: Admin@2022
-   SPRING_JPA_HIBERNATE_DDL_AUTO: UPDATE
-   SPRING_JPA_PROPERTIES_DIALECT: MYSQL57DIALECT
+ retail_Prod_Jen:
+  image: retail-prod-docker_img:latest
+  container_name:
+   "retail_prod_cont"
+  restart: unless-stopped
+ # restart: always
+  ports:
+   - 9003:9003
+  build:
+   context: ./
+   dockerfile: Dockerfile_p
+  depends_on:
+   - mysqldb
+  environment:
+   SPRING_DATASOURCE_URL: "jdbc:mysql://mysqldb:3306/ecom_batch1?createDatabaseIfNotExist=true&sessionVariables=sql_mode='NO_ENGINE_SUBSTITUTION'&jdbcCompliantTruncation=false"
+   SPRING_DATASOURCE_USERNAME: root
+   SPRING_DATASOURCE_PASSWORD: Admin@2022
+ Retail_Cart-main:
+  image: retail-cart-docker_img:latest
+  container_name:
+   "retail_cart_cont"
+  restart: unless-stopped
+ # restart: always
+  ports:
+   - 9002:9002
+  build:
+   context: ./
+   dockerfile: Dockerfile_c
+  depends_on:
+   - mysqldb
+  environment:
+   SPRING_DATASOURCE_URL: "jdbc:mysql://mysqldb:3306/ecom_batch1?createDatabaseIfNotExist=true&sessionVariables=sql_mode='NO_ENGINE_SUBSTITUTION'&jdbcCompliantTruncation=false"
+   SPRING_DATASOURCE_USERNAME: root
+   SPRING_DATASOURCE_PASSWORD: Admin@2022
+ Retail_Order-main:
+  image: retail-order-docker_img:latest
+  container_name:
+   "retail_order_cont"
+  restart: unless-stopped
+ # restart: always
+  ports:
+   - 9004:9004
+  build:
+   context: ./
+   dockerfile: Dockerfile_o
+  depends_on:
+   - mysqldb
+  environment:
+   SPRING_DATASOURCE_URL: "jdbc:mysql://mysqldb:3306/ecom_batch1?createDatabaseIfNotExist=true&sessionVariables=sql_mode='NO_ENGINE_SUBSTITUTION'&jdbcCompliantTruncation=false"
+   SPRING_DATASOURCE_USERNAME: root
+   SPRING_DATASOURCE_PASSWORD: Admin@2022
